@@ -65,4 +65,17 @@ public class PhoneServiceImpl implements PhoneService {
         log.info(" === Finish api update phone, Phone Id : {} === ", response.getId());
         return response;
     }
+
+    @Override
+    public void deleteById(String id) {
+        log.info(" === Start api deleteById phone === ");
+        log.info(" === String id : {} === ", id);
+        Optional<PhoneEntity>optionalPhone = phoneRepository.findById(id);
+        if (! optionalPhone.isPresent()){
+            throw new RuntimeException();
+        }
+        log.info(" === Finish api deleteById phone, Phone Id : {} === ");
+        phoneRepository.deleteById(id);
+    }
+
 }

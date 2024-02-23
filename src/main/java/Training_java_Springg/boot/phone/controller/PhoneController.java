@@ -43,4 +43,12 @@ public class PhoneController  {
         log.info(" === Finish api update phone, Phone Id : {} === ", response.getId());
         return response;
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteById(@PathVariable("id") String id ){
+        log.info(" ===  Start api deleteById phone === ");
+        log.info(" === String id : {} === ", id);
+        log.info(" === Finish api deleteById phone, Phone Id : {} === ");
+        service.deleteById(id);
+    }
 }
