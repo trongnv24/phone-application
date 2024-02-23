@@ -46,4 +46,23 @@ public class PhoneServiceImpl implements PhoneService {
         log.info(" Finish api getById phone, Phone Id : {} === ", response.getId());
         return response;
     }
+    @Override
+    public PhoneResponse update ( PhoneRequest request, String id){
+        log.info(" === Start api update phone === ");
+        log.info(" === Request Body : {}, String id : {} === ", request, id);
+        Optional<PhoneEntity>optionalPhone = phoneRepository.findById(id);
+        if (! optionalPhone.isPresent()){
+            throw new RuntimeException();
+        }
+        PhoneEntity entity = optionalPhone.get();
+        entity.setName(request.getName());
+        entity.setBrand(request.getBrand());
+        entity.setColor(request.getColor());
+        entity.setModel(request.getModel());
+        entity.setStorageCapacity(request.getStorageCapacity());
+        entity = phoneRepository.save(entity);
+        PhoneResponse response = convertEntityToPhoneResponse(entity);
+        log.info(" === Finish api update phone, Phone Id : {} === ", response.getId());
+        return response;
+    }
 }

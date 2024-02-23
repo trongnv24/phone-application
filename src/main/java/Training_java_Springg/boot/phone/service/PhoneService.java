@@ -8,4 +8,6 @@ public interface PhoneService {
     PhoneResponse create(PhoneRequest request);
 
     PhoneResponse getById(String id );
+
+    PhoneResponse update(PhoneRequest request, String id);
 }
