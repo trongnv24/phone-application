@@ -10,4 +10,6 @@ public interface PhoneService {
     PhoneResponse getById(String id );
 
     PhoneResponse update(PhoneRequest request, String id);
+
+    void deleteById(String id );
 }
