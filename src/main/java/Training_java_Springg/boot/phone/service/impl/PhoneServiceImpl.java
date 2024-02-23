@@ -8,6 +8,8 @@ import Training_java_Springg.boot.phone.service.PhoneService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static Training_java_Springg.boot.phone.service.mapping.PhoneMapping.convertDtoToEntity;
 import static Training_java_Springg.boot.phone.service.mapping.PhoneMapping.convertEntityToPhoneResponse;
 
@@ -29,5 +31,19 @@ public class PhoneServiceImpl implements PhoneService {
         PhoneResponse response = convertEntityToPhoneResponse(entity);
         log.info(" === Finish api create new phone, Phone Id : {} === ", response.getId());
         return response ;
+    }
+
+    @Override
+    public PhoneResponse getById(String id) {
+        log.info(" === Start api getById phone === ");
+        log.info(" === String id : {} === ", id);
+        Optional<PhoneEntity>optionalPhone = phoneRepository.findById(id);
+        if (!optionalPhone.isPresent()){
+            throw new RuntimeException();
+        }
+        PhoneEntity entity= optionalPhone.get();
+        PhoneResponse response = convertEntityToPhoneResponse(entity);
+        log.info(" Finish api getById phone, Phone Id : {} === ", response.getId());
+        return response;
     }
 }
