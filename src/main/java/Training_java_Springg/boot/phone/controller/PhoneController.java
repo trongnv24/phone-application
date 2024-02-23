@@ -25,4 +25,13 @@ public class PhoneController  {
         log.info(" === Finish api create new phone, Phone Id : {} === ", response.getId());
         return response;
     }
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public PhoneResponse getById(@PathVariable("id") String id){
+        log.info(" === Start api getById phone === ");
+        log.info(" === String id : {} ===", id);
+        PhoneResponse response = service.getById(id);
+        log.info(" === Finish api getById phone, Phone Id : {} === ", response.getId());
+        return response;
+    }
 }
